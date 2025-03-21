@@ -1,0 +1,65 @@
+---
+import "@fortawesome/fontawesome-free/css/all.min.css";
+---
+
+<header>
+    <div class="logo">
+        <i class="fa-solid fa-seedling"></i>
+        <span>Sprout</span>
+    </div>
+    <li><a href="/">Home</a></li>
+    <li><a href="/daily">Daily Record</a></li>
+    <li><a href="">About Us</a></li>
+    <a href="/login">Log In</a>
+  
+
+</header>
+
+<style>
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: rgb(177, 247, 223);
+        list-style: none;
+        padding: 2rem;
+        position: sticky;
+        top:0;
+        z-index:99
+
+    }
+    .logo{
+        font-size: 1.5rem;
+        color: orange;
+    }
+    a{
+        text-decoration: none; 
+        color: inherit;
+        font-weight: 600;
+        font-size: 1.2rem;
+x    }
+    a:hover, .fa-solid:hover{
+        color: rgb(47, 79, 79);
+    }
+    .search{
+        font-size: 1.2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap:5px
+    }
+    .fa-solid:hover{
+        font-weight: 1000;
+    }
+    input{
+        border: none;
+        outline: none;  /* 移除點擊時的外框 */
+        border-radius: 10px;
+        height: 1.2rem;
+        background-color: rgba(209, 247, 234, 0.5);
+        padding-left: 20px;
+    }
+    span{
+        font-weight:800;
+    }
+</style>

@@ -1,0 +1,53 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout>
+    <div class="login-container">
+        <h1>Login Page</h1>
+        <form action="" method="post" id="login">
+            <label for="username">Username:</label>
+            <input required type="text" id="username" name="username" />
+            <label for="password">Password:</label>
+            <input required type="password" id="password" name="password" />
+            <button type="submit">Log in</button>
+        </form>
+        <p>If you aren't our member, please creater account !</p>
+        <button><a href="/register">Create Account</a></button>
+    </div>
+</Layout>
+
+<style>
+    .login-container{
+        height: 90vh;
+    }
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+</style>
+<script>
+    const form = document.querySelector("#login") as HTMLFormElement;
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target as HTMLFormElement);
+        const formObject = Object.fromEntries(formData.entries());
+
+        const res = await fetch(`http://localhost:4000/login`, {
+            method: "post",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formObject),
+        });
+
+        if (res.ok) {
+            window.location.href = "/profile";
+        }
+        const response = await res.json();
+        alert(response.error);
+
+        // console.log(response.error)
+    });
+</script>

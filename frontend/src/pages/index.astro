@@ -1,0 +1,103 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout>
+	<div class="container">
+		<div class="photos">
+			<img
+				id="h1"
+				src="https://images.pexels.com/photos/265987/pexels-photo-265987.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+				alt=""
+			/>
+			<div class="photo-row2">
+				<img
+					id="v2-left"
+					src="https://images.pexels.com/photos/459976/pexels-photo-459976.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+					alt=""
+				/>
+				<img
+					id="v2-right"
+					src="https://images.pexels.com/photos/1104007/pexels-photo-1104007.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+					alt=""
+				/>
+			</div>
+			<!-- <img id="h3" src="https://images.pexels.com/photos/4546025/pexels-photo-4546025.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt=""> -->
+			<img
+				id="h3"
+				src="https://images.pexels.com/photos/1231365/pexels-photo-1231365.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+				alt=""
+			/>
+		</div>
+		<div class="auther">
+			<div class="auther-cont">
+				<h1>🌱 SProut to be Proud</h1>
+				<img
+					id="auther-photo"
+					src="https://images.pexels.com/photos/5561461/pexels-photo-5561461.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+					alt=""
+				/>
+				<p>
+					No matter how small the step, every effort brings you closer
+					to becoming the best version of yourself. Keep growing, keep
+					striving, and be proud of how far you've come! 🌿
+				</p>
+			</div>
+		</div>
+	</div>
+</Layout>
+
+<style>
+	.container {
+		display: flex;
+		position: relative;
+	}
+	.photos {
+		flex: 8; /* 左側佔 70% */
+		/* background-color: lightblue; */
+		padding: 20px;
+		text-align: center;
+	}
+	.auther {
+		flex: 2; /* 右側佔 30% */
+		background-color: rgb(232, 233, 222);
+		padding: 20px;
+		text-align: center;
+		position: relative;
+	}
+	.auther-cont {
+		position: fixed;
+	}
+	.auther p {
+		font-size: 1.5rem;
+	}
+	#h1,
+	#h3 {
+		width: 100%;
+		height: auto;
+	}
+	#v2-left,
+	#v2-right {
+		width: 45%;
+	}
+	.photo-row2 {
+		display: flex;
+		justify-content: center;
+		gap: 5px;
+		padding: 5px;
+	}
+	#auther-photo {
+		width: 100%;
+	}
+</style>
+
+<script>
+	const userList = document.querySelector(".user-list") as HTMLFormElement;
+	const res = await fetch(`http://localhost:4000`, {
+		method: "get",
+		credentials: "include",
+	});
+	const data = await res.json();
+	console.log(data);
+	userList.innerHTML = `Hello ${data[0].username}`;
+</script>
