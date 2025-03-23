@@ -9,13 +9,43 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
     </div>
     <li><a href="/">Home</a></li>
     <li><a href="/daily">Daily Record</a></li>
-    <li><a href="">About Us</a></li>
-    <a href="/login">Log In</a>
-  
-
+    <a class="profile-btn" href="/profile">Profile</a>
+    <a class="login" href="/login">Log In</a>
+    <a class="logout" href="/">Log Out</a>
 </header>
 
+<script>
+    const profileBtn = document.querySelector('.profile-btn') as HTMLElement
+    const loginBtn = document.querySelector('.login') as HTMLElement
+    const logoutBtn = document.querySelector('.logout') as HTMLElement
+
+    const getData = async () => {
+        const res = await fetch(`http://localhost:4000/check-auth`, {
+            method: "get",
+            credentials: "include",
+        });
+        if (res.ok) {
+            profileBtn.style.display = 'block';
+            logoutBtn.style.display = 'block';
+            loginBtn.style.display = 'none';
+        }
+    };
+    getData()
+    const logout = document.querySelector('.logout') as HTMLElement
+    logout.addEventListener('click', async ()=>{
+        const res = await fetch('http://localhost:4000/logout',{
+            method: 'get',
+            credentials: 'include'
+        })
+        alert('Log out, see you~')
+        window.location.href='/'
+    })
+</script>
+
 <style>
+    .logout, .profile-btn {
+       display: none; 
+    }
     header {
         display: flex;
         justify-content: space-between;
@@ -26,7 +56,6 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
         position: sticky;
         top:0;
         z-index:99
-
     }
     .logo{
         font-size: 1.5rem;
@@ -40,6 +69,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 x    }
     a:hover, .fa-solid:hover{
         color: rgb(47, 79, 79);
+        cursor: pointer;
     }
     .search{
         font-size: 1.2rem;

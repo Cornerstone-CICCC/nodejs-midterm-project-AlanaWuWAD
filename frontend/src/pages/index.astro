@@ -69,7 +69,7 @@ import Layout from "../layouts/Layout.astro";
 		position: fixed;
 	}
 	.auther p {
-		font-size: 1.5rem;
+		font-size: 1rem;
 	}
 	#h1,
 	#h3 {
@@ -87,17 +87,20 @@ import Layout from "../layouts/Layout.astro";
 		padding: 5px;
 	}
 	#auther-photo {
-		width: 100%;
+		width: 90%;
+		border-radius: 10px;
+	}
+	img{
+		border-radius: 10px;
 	}
 </style>
 
 <script>
-	const userList = document.querySelector(".user-list") as HTMLFormElement;
+	// const userList = document.querySelector(".user-list") as HTMLFormElement;
 	const res = await fetch(`http://localhost:4000`, {
 		method: "get",
 		credentials: "include",
 	});
 	const data = await res.json();
-	console.log(data);
-	userList.innerHTML = `Hello ${data[0].username}`;
+	// userList.innerHTML = `Hello ${data[0].username}`;
 </script>

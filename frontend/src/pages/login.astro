@@ -4,22 +4,53 @@ import Layout from "../layouts/Layout.astro";
 
 <Layout>
     <div class="login-container">
-        <h1>Login Page</h1>
-        <form action="" method="post" id="login">
+        <!-- <h1>Login</h1> -->
+        <form  class="login-form" action="" method="post" id="login">
+            <div class="user-login">
             <label for="username">Username:</label>
             <input required type="text" id="username" name="username" />
+        </div>
+        <div class="user-password">
             <label for="password">Password:</label>
             <input required type="password" id="password" name="password" />
-            <button type="submit">Log in</button>
+        </div>
+            <button class="login-btn" type="submit">Log in</button>
         </form>
-        <p>If you aren't our member, please creater account !</p>
-        <button><a href="/register">Create Account</a></button>
+        <p>If you aren't our member, please create account !</p>
+        <button class="register-btn"><a href="/register">Create Account</a></button>
     </div>
 </Layout>
 
 <style>
+    .login-btn, .register-btn{
+			color: #EA4C89;
+			background: none;
+			border: none;
+			outline: none;
+			padding: 5px 10px;
+			font-size: 16px;
+            font-weight: 600;
+			cursor: pointer;
+		}
+
+		.login-btn:hover, .register-btn:hover {
+			text-decoration: underline;
+			color: rgb(47, 79, 79);  
+		}
+
+    .login-form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 1.5rem;
+    }
     .login-container{
-        height: 90vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 75vh;
     }
     a {
         text-decoration: none;

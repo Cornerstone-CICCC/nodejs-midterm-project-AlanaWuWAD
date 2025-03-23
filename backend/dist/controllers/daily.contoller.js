@@ -4,6 +4,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const daily_model_1 = __importDefault(require("../models/daily.model"));
+const multer_1 = __importDefault(require("multer"));
+const uuid_1 = require("uuid");
+const storage = multer_1.default.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "uploads/");
+    },
+    filename: (req, file, cb) => {
+        cb(null, (0, uuid_1.v4)() + "-" + file.originalname);
+    }
+});
+const upload = (0, multer_1.default)({ storage });
 const getAlldailys = (req, res) => {
     const dailys = daily_model_1.default.browseDaily();
     res.status(200).json(dailys);
@@ -18,11 +29,12 @@ const getDaily = (req, res) => {
 };
 const addNewDaily = (req, res) => {
     const { title, date, age, description } = req.body;
+    const img = req.file ? `/uploads/${req.file.filename}` : null;
     if (!title || !date) {
         res.status(500).json({ message: `Please fill in Title and Date` });
         return;
     }
-    const daily = daily_model_1.default.addDaily({ title, date, age, description });
+    const daily = daily_model_1.default.addDaily({ title, date, img, age, description });
     res.json(daily);
 };
 const deleteDailyById = (req, res) => {
@@ -40,8 +52,8 @@ const searchKenny = (req, res) => {
 };
 const editDailyById = (req, res) => {
     const { id } = req.params;
-    const { title, date, age, description } = req.body;
-    const editContent = daily_model_1.default.editDaily(id, { title, date, age, description });
+    const { title, date, img, age, description } = req.body;
+    const editContent = daily_model_1.default.editDaily(id, { title, date, img, age, description });
     if (!editContent) {
         res.json({ error: ` Not found ID!` });
     }
@@ -49,7 +61,7 @@ const editDailyById = (req, res) => {
 };
 exports.default = {
     getAlldailys,
-    addNewDaily,
+    addNewDaily: [upload.single('img'), addNewDaily],
     getDaily,
     deleteDailyById,
     searchKenny,

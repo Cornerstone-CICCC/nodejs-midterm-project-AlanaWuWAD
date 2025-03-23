@@ -4,25 +4,30 @@ import Layout from "../layouts/Layout.astro";
 
 <Layout>
     <div class="option">
-        <div class="active all-list-container">
-            <i class="fa-solid fa-table-list"></i><span>All List<span/>  
+        <div class="all-list-container">
+            <i class="fa-solid fa-table-list"></i><span><a href="/daily">All List</a><span>
         </div>
         <div class="create-container">
-            <i class="fa-solid fa-square-plus"></i> <span>Create New<span/>  
+            <i class="fa-solid fa-square-plus"></i><span>Create New</span>
         </div>
-        <div class="favorite-container">
-            <i class="fa-solid fa-heart"></i> <span>Favorite Post<span/>
-        </div>
+        <!-- <div class="favorite-container">
+            <i class="fa-solid fa-heart"></i><span>Favorite Post</span>
+        </div> -->
         <div class="search-container">
             <div class="search">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input class="search-input" type="text" placeholder="Enter something">
+                <input class="search-input" type="text" placeholder="Enter Title"/>
             </div>
         </div>
     </div>
-    <!-- add daily modal -->
+
+<!-- add daily modal -->
     <dialog id="add-modal">
-        <form action="" method="post" id="daily-post">
+        <form action="" method="post" id="daily-post" enctype="multipart/form-data">
+            <div class="add-img">
+                <label for="img">Picture:</label>
+                <input type="file" id="img" name="img" />
+            </div>
             <div class="title-box">
                 <label for="title">Title:</label>
                 <input type="text" id="title" name="title" />
@@ -33,23 +38,19 @@ import Layout from "../layouts/Layout.astro";
             </div>
             <div class="age-form">
                 <label for="age">Age:</label>
-                <input
-                    type="text"
-                    id="age"
-                    name="age"
-                    placeholder="Enter age"
-                />
+                <input type="text" id="age" name="age" placeholder="Enter age"/>
             </div>
             <div class="des-box">
                 <label for="description">Description:</label>
-                <input type="text" id="description" name="description" />
+                <input type="text" id="description" name="description"/>
             </div>
-        <button id="modal-submit-btn" type="submit">Add</button>
+            <button id="modal-submit-btn" type="submit">Add</button>
         </form>
         <button id="add-modal-close-btn">Close</button>
     </dialog>
-    <!--  add daily modal  -->
-      <!-- eidte daily modal -->
+<!--  add daily modal  -->
+
+<!-- eidte daily modal -->
     <dialog id="edit-modal">
         <form action="" method="put" class="daily-edit">
             <div class="title-box">
@@ -62,206 +63,289 @@ import Layout from "../layouts/Layout.astro";
             </div>
             <div class="age-form">
                 <label for="age">Age:</label>
-                <input
-                    type="text"
-                    id="age"
-                    name="age"
-                    placeholder="Enter age"
-                />
+                <input type="text" id="age" name="age" placeholder="Enter age"/>
             </div>
             <div class="des-box">
                 <label for="description">Description:</label>
-                <input type="text" id="description" name="description" />
+                <input type="text" id="description" name="description"/>
             </div>
-        <button id="modal-submit-btn" type="submit">Edite</button>
+            <button id="modal-submit-btn" type="submit">Edite</button>
         </form>
         <button id="edit-modal-close-btn">Close</button>
     </dialog>
     <!--  edite daily modal  -->
-    <div class="daily-container">
-        
-    </div>
-</Layout>
 
-<style>
-    .day-record {
-        background-color:red;
-    }
-    .option{
-        display: flex;
-        justify-content: space-evenly;
-        padding: 1rem;
-    }
-    .daily-container {
-        display: flex;
-    }
-    .day-record {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        align-items: center;
-        gap: 5px;
-        padding: 1rem;
-    }
-    form {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        gap: 5px;
-        padding: 1rem;
-    }
-    #daily-post {
-        display: flex;
-        justify-content: center;
-    }
-    #title,
-    #date,
-    #years,
-    #months,
-    #des {
-        border: none;
-    }
-    .img-contanier{
-        width: 90%;
-    }
-    img {
-        width: 30rem;
-    }
-    .day-record {
-        border: solid 2px	rgb(255, 239, 213);
-    }
-    .day-record:hover {
-        box-shadow: 10px 5px 5px rgb(255, 239, 213);
-    }
-    
-    .all-list-container, .create-container, .sort-container, .favorite-container{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: black;
-        background-color: rgb(47, 79, 79);
-        width: 200px;
-        height:2rem;
-        border-radius: 20px 20px 3px 3px;
-    }
-    .all-list-container:hover, .create-container:hover, .sort-container:hover, .favorite-container:hover{
-        background-color: 	rgb(152, 251, 152);
-        cursor:pointer;
-    }
-    i{
-        padding:10px;
-        color:	rgb(255, 140, 0);
-    }
-    span{
-        color:	rgb(255, 140, 0);
-        font-size:1.1rem;
-    }
-    .daily-option{
-        display: flex;
-        justify-content:space-evenly;;
-        align-items:center;
-        width:100%;
-    }
-    .daily-option i{
-        color:rgb(255, 140, 0);
-    }
-
-    .active {
-        background-color: 	rgb(152, 251, 152);
-    }
-    .favorite-btn{
-        color:red;
-        margin: 0;
-        padding: 0;
-        border: none;
-        outline: none;
-        background-color: transparent;
-        font-size:1.1rem;
-
-    }
-    button:hover{
-        cursor:pointer;
-    }
-    .favorite-btn {
-    color: red;
-}
-</style>
-
-<script>
-    const container = document.querySelector(".daily-container");
-    const allListBtn = document.querySelector('#all-list-container')
-    const createrBtn = document.querySelector('#create-container')
-    const sortBtn = document.querySelector('#sort-container')
-    const addModal = document.querySelector('#add-modal')
-    const openAddModal = document.querySelector('.create-container')
-    const closeAddModal = document.querySelector('#add-modal-close-btn')
-    const editModal = document.querySelector('#edit-modal')
-    const openEditModal = document.querySelector('.edite-btn')
-    const closeEditModal = document.querySelector('#edit-modal-close-btn')
-    const searchInput = document.querySelector('.search-input')
-
-    document.addEventListener("DOMContentLoaded", () => {
-        render()
-    });
-
-    openAddModal.addEventListener('click',()=>{
-        addModal.showModal()
-    })
-    closeAddModal.addEventListener('click',()=>{
-        addModal.close()
-    })
-    closeEditModal.addEventListener('click',()=>{
-        editModal.close()
-    })
-
-    //search
-    searchInput.addEventListener('input', async(e)=>{
-        const input = e.target.value
-        let data = await searchContent(input)
-        console.log('SEARCHl',data)
-
-        render(data)
-    })
-
-    const searchContent = async (query) => {
-        const res = await fetch(`http://localhost:4000/daily/search?title=${query}`, {
-            method: "get",
-            credentials: "include",
-        });
-        const data = await res.json();
-
-         return data
-    };
-
-    const render = async(data)=>{
-        if (!data) {
-            data = await getContent();
-        }
-
-        console.log(data);
+    <div class="daily-container"></div>
         
 
-        //clear all
-        container.innerHTML = "";
-        //clone
-        data.forEach((d: any) => {
-            const template = document.createElement('div')
-            template.classList.add('day-record')
-        template.innerHTML = `
-        <a href=/${d.id}>Link</a>
-        <form action="" method="post" id="daily-post">
+            <style>
+                .option {
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 1rem;
+                }
+                .daily-container {
+                    display: flex;
+                }
+                .day-record {
+                    display: flex;
+                    justify-content: center;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 5px;
+                    padding: 1rem;
+                }
+                label {
+                    color: blue;
+                }
+                input {
+                    border: none;
+                }
+
+                .all-list-container,
+                .create-container,
+                .sort-container,
+                .favorite-container {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: black;
+                    background-color: rgb(47, 79, 79);
+                    width: 200px;
+                    height: 2rem;
+                    border-radius: 20px 20px 3px 3px;
+                }
+                .search-container {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: black;
+                    background-color: rgb(47, 79, 79);
+                    width: 400px;
+                    height: 2rem;
+                    border-radius: 20px 20px 3px 3px;
+                }
+                .search-input{
+                    background-color:rgb(255, 140, 0) ;
+                    height: 1.2rem;
+                }
+                .all-list-container:hover,
+                .create-container:hover,
+                .sort-container:hover,
+                .favorite-container:hover {
+                    background-color: rgb(152, 251, 152);
+                    cursor: pointer;
+                }
+                i {
+                    padding: 10px;
+                    color: rgb(255, 140, 0);
+                }
+                span {
+                    color: rgb(255, 140, 0);
+                    font-size: 1.1rem;
+                }
+                .active {
+                    background-color: rgb(152, 251, 152);
+                }
+                #add-modal, #edit-modal{
+                    width: 60%;
+                    align-content: center;
+                    border-radius: 10px;
+                    box-shadow: 5px 5px 5px grey;
+                    border: solid 2px rgb(240, 255, 240);
+                    background-color: rgb(32, 178, 170);
+                }
+                #daily-post, .daily-edit{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1rem;
+                    align-items: baseline;
+                }
+                label{
+                    color: rgba(0, 0, 0,0.7);
+                    font-size: 1.5rem;
+                }
+                input{
+                    outline: none;
+                    border-radius: 5px;
+                    width: 100%;
+                    height: 1.6rem;
+                    font-size: 1.1rem;
+                }
+                #description{
+                    height: 5rem;
+                }
+                .title-box, .data-box, .age-form, .des-box{
+                    display: flex;
+                    flex-direction: column;
+                    width: 100%;
+                }
+                #modal-submit-btn{
+                    background-color: #EA4C89;
+                    border-radius: 8px;
+                    border-style: none;
+                    box-sizing: border-box;
+                    color: #FFFFFF;
+                    cursor: pointer;
+                    font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+                    font-size: 14px;
+                    font-weight: 500;
+                    height: 42px;
+                    width: 70px;
+                    line-height: 20px;
+                    list-style: none;
+                    margin: 0;
+                    outline: none;
+                    padding: 2px 10px;
+                    position: relative;
+                    text-align: center;
+                    text-decoration: none;
+                    transition: color 100ms;
+                    vertical-align: baseline;
+                    user-select: none;
+                    -webkit-user-select: none;
+                    touch-action: manipulation;
+                    margin-left: auto;
+                    top:2.6rem;
+                   }
+                   #modal-submit-btn:hover,
+                   #modal-submit-btn:focus {
+                    background-color: #F082AC;
+                  }
+                  #edit-modal-close-btn,#add-modal-close-btn{
+                    background-color: #6E6D70;
+                    border-radius: 8px;
+                    border-width: 0;
+                    color: #DFDEDF;
+                    cursor: pointer;
+                    display: inline-block;
+                    font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+                    font-size: 14px;
+                    font-weight: 500;
+                    line-height: 20px;
+                    list-style: none;
+                    margin: 0;
+                    padding: 10px 12px;
+                    text-align: center;
+                    transition: all 200ms;
+                    vertical-align: baseline;
+                    white-space: nowrap;
+                    user-select: none;
+                    -webkit-user-select: none;
+                    touch-action: manipulation;
+                  }
+                  .search{
+                    display: flex;
+                    align-items: center;
+                  }
+             
+                  a{
+                    text-decoration: none; 
+                    color: inherit;
+                  }
+            </style>
+
+            <script>
+                const container = document.querySelector(
+                    ".daily-container",
+                ) as HTMLElement;
+                const allListBtn = document.querySelector(
+                    "#all-list-container",
+                ) as HTMLElement;
+                const createrBtn = document.querySelector(
+                    "#create-container",
+                ) as HTMLElement;
+                const sortBtn = document.querySelector(
+                    "#sort-container",
+                ) as HTMLElement;
+                const addModal = document.querySelector(
+                    "#add-modal",
+                ) as HTMLElement;
+                const openAddModal = document.querySelector(
+                    ".create-container",
+                ) as HTMLElement;
+                const closeAddModal = document.querySelector(
+                    "#add-modal-close-btn",
+                ) as HTMLElement;
+                const editModal = document.querySelector(
+                    "#edit-modal",
+                ) as HTMLElement;
+                const openEditModal = document.querySelector(
+                    ".edite-btn",
+                ) as HTMLElement;
+                const closeEditModal = document.querySelector(
+                    "#edit-modal-close-btn",
+                ) as HTMLElement;
+                const searchInput = document.querySelector(
+                    ".search-input",
+                ) as HTMLElement;
+
+                document.addEventListener("DOMContentLoaded", () => {
+                    render();
+                });
+
+                openAddModal.addEventListener("click", () => {
+                    addModal.showModal();
+                });
+                closeAddModal.addEventListener("click", () => {
+                    addModal.close();
+                });
+                closeEditModal.addEventListener("click", () => {
+                    editModal.close();
+                });
+
+                //search
+                searchInput.addEventListener("input", async (e) => {
+                    const input = e.target.value;
+                    let data = await searchContent(input);
+                    console.log("SEARCHl", data);
+
+                    render(data);
+                });
+
+                const searchContent = async (query) => {
+                    const res = await fetch(
+                        `http://localhost:4000/daily/search?title=${query}`,
+                        {
+                            method: "get",
+                            credentials: "include",
+                        },
+                    );
+                    const data = await res.json();
+
+                    return data;
+                };
+
+                const render = async (data) => {
+                    if (!data) {
+                        data = await getContent();
+                    }
+
+                    console.log(data);
+
+                    //clear all
+                    container.innerHTML = "";
+                    //clone
+                    data.forEach((d: any) => {
+                        const template = document.createElement("div");
+                        template.classList.add("day-record");
+                        template.innerHTML = `
+                        <div class="dailypost-container">
+        <a class="daily-detail" href="/${d.id}"><img class="daily-img" src="http://localhost:4000${d.img}" alt=""/></a>
+        <form action="" method="post" id="post" enctype="multipart/form-data">
                 <div class="title-box">
                     <label for="title">Title:</label>
-                    <input type="text" id="title" name="title" />
+                    <input type="text" class="daily-title" id="title" name="title" />
                 </div>
                 <div class="data-box">
                     <label for="date">Date:</label>
-                    <input type="date" id="date" name="date" />
+                    <input type="date" class="daily-date" id="date" name="date" />
                 </div>
                 <div class="age-form">
                     <label for="age">Age:</label>
                     <input
                         type="text"
+                        class="daily-age"
                         id="age"
                         name="age"
                         placeholder="Enter age"
@@ -269,7 +353,7 @@ import Layout from "../layouts/Layout.astro";
                 </div>
                 <div class="des-box">
                     <label for="description">Description:</label>
-                    <input type="text" id="description" name="description" />
+                    <input type="text" class="daily-description" id="description" name="description" />
                 </div>
             </form>
             <div class="daily-option">
@@ -277,113 +361,115 @@ import Layout from "../layouts/Layout.astro";
                 <button class="favorite-btn"><i id='favorite' class="fa-solid fa-heart"></i></button>
                 <button class="delete-btn"><i id='delete' class="fa-solid fa-trash"></i></button>
             </div>
-        `
-            template.querySelector("#title").value = d.title || "";
-            template.querySelector("#date").value = d.date || "";
-            template.querySelector("#age").value = d.age;
-            // template.querySelector("#months").value = d.age % 12 || 0;
-            template.querySelector("#description").value = d.description || "";
+            </div>
+        `;
+                        template.querySelector("#title").value = d.title || "";
+                        template.querySelector("#date").value = d.date || "";
+                        template.querySelector("#age").value = d.age;
+                        // template.querySelector("#months").value = d.age % 12 || 0;
+                        template.querySelector("#description").value =
+                            d.description || "";
 
-            // create img link
-            // const imgContainer = document.createElement("div");
-            // imgContainer.classList.add("img-contanier");
+                        const deleteBtn = template.querySelector(".delete-btn");
+                        deleteBtn.addEventListener("click", () => {
+                            deleteContent(d.id);
+                        });
+                        const editeBtn = template.querySelector(".edite-btn");
+                        editeBtn.addEventListener("click", () => {
+                            const form = document.querySelector(
+                                ".daily-edit",
+                            ) as HTMLFormElement;
+                            form.querySelector("#title").value = d.title;
+                            form.querySelector("#date").value = d.date;
+                            form.querySelector("#age").value = d.age;
+                            form.querySelector("#description").value =
+                                d.description;
 
-            // let imgElem = document.createElement("img");
-            // imgElem.src = d.img;
-            // imgElem.alt = "daily img";
-            // imgElem.style.width = "200px";
-            // imgElem.style.height = "auto"
-            // imgElem.style.borderRadius = "10px";
-            // imgElem.style.marginTop = "10px";
+                            editModal.showModal();
+                            form.addEventListener("submit", (e) => {
+                                e.preventDefault();
+                                const formData = new FormData(
+                                    e.target as HTMLFormElement,
+                                );
+                                const formObject = Object.fromEntries(
+                                    formData.entries(),
+                                );
+                                editContent(d.id, formObject);
+                            });
+                        });
+                        container.append(template);
+                    });
+                };
+                const getContent = async () => {
+                    const res = await fetch(`http://localhost:4000/daily`, {
+                        method: "get",
+                        credentials: "include",
+                    });
+                    if (!res.ok) {
+                        alert(`Please login!`);
+                        window.location.href = "/login"
+                        return
+                    }
+                    const data = await res.json();
+                    return data;
+                };
 
-            const deleteBtn = template.querySelector('.delete-btn')
-            deleteBtn.addEventListener('click',()=>{
-                deleteContent(d.id)
-            })
-            const editeBtn = template.querySelector('.edite-btn')
-            editeBtn.addEventListener('click',()=>{
-                const form = document.querySelector(".daily-edit") as HTMLFormElement
-                form.querySelector('#title').value = d.title
-                form.querySelector('#date').value = d.date
-                form.querySelector('#age').value = d.age
-                form.querySelector('#description').value = d.description
+                const deleteContent = async (id) => {
+                    const res = await fetch(
+                        `http://localhost:4000/daily/${id}`,
+                        {
+                            method: "delete",
+                            credentials: "include",
+                        },
+                    );
+                    if (!res.ok) {
+                        alert(`Server's problem!`);
+                    }
+                    render();
+                };
 
-                editModal.showModal()
-                    form.addEventListener("submit",(e) => {
-                        e.preventDefault()
-                        const formData = new FormData(e.target as HTMLFormElement)
-                        const formObject = Object.fromEntries(formData.entries())
-                        editContent(d.id,formObject)
-                    })
-                    
-            })
-            container.append(template);
-        });
-    }
-    const getContent = async () => {
-        const res = await fetch(`http://localhost:4000/daily`, {
-            method: "get",
-            credentials: "include",
-        });
-        if (!res.ok) {
-            alert(`Server's problem!`);
-        }
-        const data = await res.json();
-         return data
-    };
+                //edite Content
+                const editContent = async (id, updated) => {
+                    const res = await fetch(
+                        `http://localhost:4000/daily/${id}`,
+                        {
+                            method: "put",
+                            credentials: "include",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify(updated),
+                        },
+                    );
+                    if (!res.ok) {
+                        alert("Error");
+                    }
+                    alert("send");
+                    editModal.close();
+                    render();
+                };
 
-    const deleteContent = async (id) => {
-        const res = await fetch(`http://localhost:4000/daily/${id}`, {
-            method: "delete",
-            credentials: "include",
-        });
-        if (!res.ok) {
-            alert(`Server's problem!`);
-        }
-        render()
-    };
-
-    //edite Content 
-    const editContent = async(id, updated)=>{
-        const res = await fetch(`http://localhost:4000/daily/${id}`,{
-            method:"put",
-            credentials: "include",
-            headers:{
-                "Content-Type":"application/json",
-            },
-            body:JSON.stringify(updated)
-        })
-        if(!res.ok){
-            alert('Error');
-        }
-        alert('send')
-        editModal.close()
-        render()
-    }
-   
-    //add content
-    const form = document.querySelector("#daily-post") as HTMLFormElement
-    form.addEventListener("submit",async(e) => {
-        e.preventDefault()
-        const formData = new FormData(e.target as HTMLFormElement)
-        const formObject = Object.fromEntries(formData.entries())
-        const res = await fetch(`http://localhost:4000/daily`,{
-            method:"post",
-            credentials: "include",
-            headers:{
-                "Content-Type":"application/json",
-            },
-            body:JSON.stringify(formObject)
-        })
-        if(!res.ok){
-            alert('Error');
-        }
-        alert('send')
-        addModal.close()
-        render()
-    })
-    
-        
-    
-
-</script>
+                //add content
+                const form = document.querySelector(
+                    "#daily-post",
+                ) as HTMLFormElement;
+                form.addEventListener("submit", async (e) => {
+                    e.preventDefault();
+                    const formData = new FormData(e.target as HTMLFormElement);
+                    // const formObject = Object.fromEntries(formData.entries());
+                    const res = await fetch(`http://localhost:4000/daily`, {
+                        method: "post",
+                        credentials: "include",
+                        body: formData,
+                    });
+                    if (!res.ok) {
+                        alert("Error");
+                    }
+                    console.log(formData);
+                    addModal.close();
+                    render();
+                });
+            </script>
+        </div>
+    </div></Layout
+>

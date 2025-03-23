@@ -2,10 +2,10 @@ import express from 'express'
 import path from 'path'
 import cookiSession from 'cookie-session'
 import cors from 'cors'
-import homeContrller from './controllers/home.contrller'
 import dotenv from 'dotenv'
 import homeRouter from './routes/home.route'
 import dailyRouter from './routes/daily.route'
+import { checkLogin } from './middleware/auth.mw'
 dotenv.config()
 
 //create server
@@ -20,19 +20,20 @@ if(!SING_KEY || !ENCRYPT_KEY){
 app.use(cookiSession({
     name:'session',
     keys:[ SING_KEY, ENCRYPT_KEY],
-    maxAge: 5*6*1000
+    maxAge: 15*6*1000
 }))
 app.use(express())
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 app.use(cors({
-    origin: 'http://localhost:4322', //Astro port
+    origin: 'http://localhost:4321', //Astro port
     credentials: true  //allow cookies
 }))
+app.use("/uploads", express.static(path.join(__dirname, '../uploads'))) //to read static files
 
 //routes
 app.use('/', homeRouter)
-app.use('/daily', dailyRouter)
+app.use('/daily',dailyRouter)
 
 //404
 app.use((req, res)=>{
