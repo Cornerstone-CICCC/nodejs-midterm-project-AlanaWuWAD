@@ -20,7 +20,7 @@ if(!SING_KEY || !ENCRYPT_KEY){
 app.use(cookiSession({
     name:'session',
     keys:[ SING_KEY, ENCRYPT_KEY],
-    maxAge: 15*6*1000
+    // maxAge: 15*6*1000
 }))
 app.use(express())
 app.use(express.urlencoded({extended:true}))

@@ -6,24 +6,27 @@ import Layout from "../layouts/Layout.astro";
 	<div class="container">
 		<div class="photos">
 			<img
+				class="fade-in"
 				id="h1"
 				src="https://images.pexels.com/photos/265987/pexels-photo-265987.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
 				alt=""
 			/>
 			<div class="photo-row2">
 				<img
+					class="fade-in"
 					id="v2-left"
 					src="https://images.pexels.com/photos/459976/pexels-photo-459976.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
 					alt=""
 				/>
 				<img
+					class="fade-in"
 					id="v2-right"
 					src="https://images.pexels.com/photos/1104007/pexels-photo-1104007.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
 					alt=""
 				/>
 			</div>
-			<!-- <img id="h3" src="https://images.pexels.com/photos/4546025/pexels-photo-4546025.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt=""> -->
 			<img
+				class="fade-in"
 				id="h3"
 				src="https://images.pexels.com/photos/1231365/pexels-photo-1231365.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
 				alt=""
@@ -48,7 +51,19 @@ import Layout from "../layouts/Layout.astro";
 </Layout>
 
 <style>
-	.container {
+/* .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.fade-in.show {
+    opacity: 1;
+    transform: translateY(0);
+} */
+
+
+.container {
 		display: flex;
 		position: relative;
 	}
@@ -67,6 +82,8 @@ import Layout from "../layouts/Layout.astro";
 	}
 	.auther-cont {
 		position: fixed;
+		top:5rem;
+		padding: 0.5rem;
 	}
 	.auther p {
 		font-size: 1rem;
@@ -96,11 +113,19 @@ import Layout from "../layouts/Layout.astro";
 </style>
 
 <script>
-	// const userList = document.querySelector(".user-list") as HTMLFormElement;
 	const res = await fetch(`http://localhost:4000`, {
 		method: "get",
 		credentials: "include",
 	});
 	const data = await res.json();
-	// userList.innerHTML = `Hello ${data[0].username}`;
+
+// 	// window.addEventListener("scroll", function () {
+//     // document.querySelectorAll(".fade-in").forEach(img => {
+//     //     let rect = img.getBoundingClientRect();
+//     //     if (rect.top < window.innerHeight * 0.6) {
+//     //         img.classList.add("show");
+//     //     }
+//     // });
+// });
+
 </script>

@@ -22,7 +22,7 @@ if (!SING_KEY || !ENCRYPT_KEY) {
 app.use((0, cookie_session_1.default)({
     name: 'session',
     keys: [SING_KEY, ENCRYPT_KEY],
-    maxAge: 15 * 6 * 1000
+    // maxAge: 15*6*1000
 }));
 app.use((0, express_1.default)());
 app.use(express_1.default.urlencoded({ extended: true }));

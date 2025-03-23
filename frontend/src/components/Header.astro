@@ -5,16 +5,31 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 <header>
     <div class="logo">
         <i class="fa-solid fa-seedling"></i>
-        <span>Sprout</span>
+        <span>SProut</span>
     </div>
-    <li><a href="/">Home</a></li>
-    <li><a href="/daily">Daily Record</a></li>
+    <div class="non-resposive">
+    <a href="/">Home</a>
+    <a href="/daily">Daily Record</a>
     <a class="profile-btn" href="/profile">Profile</a>
     <a class="login" href="/login">Log In</a>
     <a class="logout" href="/">Log Out</a>
+</div>
+    <div class="menu-toggle">☰</div> <!-- 漢堡選單按鈕 -->
+    <nav>
+        <a href="/">Home</a>
+        <a href="/daily">Daily Record</a>
+        <a class="profile-btn" href="/profile">Profile</a>
+        <a class="login" href="/login">Log In</a>
+        <a class="logout" href="/">Log Out</a>
+    </nav>
 </header>
 
 <script>
+document.querySelector(".menu-toggle").addEventListener("click", function () {
+    document.querySelector("nav").classList.toggle("nav-active");
+});
+
+    
     const profileBtn = document.querySelector('.profile-btn') as HTMLElement
     const loginBtn = document.querySelector('.login') as HTMLElement
     const logoutBtn = document.querySelector('.logout') as HTMLElement
@@ -43,21 +58,45 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 </script>
 
 <style>
+
+    .menu-toggle{
+        display: none;
+    }
+nav {
+    display: none;
+    gap: 15px;
+}
+nav a {
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+}
+
+
     .logout, .profile-btn {
        display: none; 
     }
     header {
         display: flex;
         justify-content: space-between;
-        align-items: center;
+        /* align-items: center; */
         background-color: rgb(177, 247, 223);
         list-style: none;
-        padding: 2rem;
+        padding: 1.5rem;
         position: sticky;
         top:0;
-        z-index:99
+        z-index:99;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1)
+    }
+    .non-resposive{
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        width: 100%;
+
     }
     .logo{
+        display: flex;
         font-size: 1.5rem;
         color: orange;
     }
@@ -92,4 +131,40 @@ x    }
     span{
         font-weight:800;
     }
+    
+@media (max-width: 768px) {
+    .non-resposive{
+        display: none;
+    }
+    header {
+        padding: 10px;
+    }
+
+    nav {
+        flex-direction: column; /* 導覽列變為直列 */
+        display: none; /* 預設隱藏 */
+        width: 100%;
+        text-align: center;
+    }
+
+    nav a {
+        padding: 10px;
+        display: block;
+        width: 100%;
+    }
+
+    /* 🔹 漢堡選單按鈕 */
+    .menu-toggle {
+        display: block;
+        font-size: 24px;
+        cursor: pointer;
+        position: absolute;
+    right: 20px; 
+    }
+
+    /* 🔹 當點擊按鈕時，顯示選單 */
+    .nav-active {
+        display: flex;
+    }
+}
 </style>
