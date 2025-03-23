@@ -38,9 +38,7 @@ import Layout from "../layouts/Layout.astro";
 <script>
     document.addEventListener("DOMContentLoaded", async () => {
         const data = await getData();
-        const username = document.querySelector(
-            "#username",
-        ) as HTMLParagraphElement;
+        const username = document.querySelector("#username") as HTMLElement;
 
         username.innerHTML = `<div style= "font-size:2rem"><b>Hi ! </b> <span style= "color:rgb(32, 178, 170)"> ${data.username}</span>. Welcome to SProut  <i class="fa-solid fa-seedling" style= "color:orange"></i></div>`;
     });

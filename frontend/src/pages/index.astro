@@ -122,6 +122,12 @@ import Layout from "../layouts/Layout.astro";
 .sentence:nth-child(1) { animation-delay: 0.2s; }
 .sentence:nth-child(2) { animation-delay: 5s; }
 .sentence:nth-child(3) { animation-delay: 2s; }
+
+@media (max-width: 768px) {
+	.auther-cont, h1{
+		font-size: 1rem;
+	}
+}
 </style>
 
 <script>

@@ -30,9 +30,9 @@ document.querySelector(".menu-toggle").addEventListener("click", function () {
 });
 
     
-    const profileBtn = document.querySelector('.profile-btn') as HTMLElement
-    const loginBtn = document.querySelector('.login') as HTMLElement
-    const logoutBtn = document.querySelector('.logout') as HTMLElement
+    const profileBtn = document.querySelector(".profile-btn") as HTMLElement
+    const loginBtn = document.querySelector(".login") as HTMLElement
+    const logoutBtn = document.querySelector(".logout") as HTMLElement
 
     const getData = async () => {
         const res = await fetch(`http://localhost:4000/check-auth`, {
@@ -46,7 +46,7 @@ document.querySelector(".menu-toggle").addEventListener("click", function () {
         }
     };
     getData()
-    const logout = document.querySelector('.logout') as HTMLElement
+    const logout = document.querySelector(".logout") as HTMLElement
     logout.addEventListener('click', async ()=>{
         const res = await fetch('http://localhost:4000/logout',{
             method: 'get',
@@ -105,7 +105,7 @@ nav a {
         color: inherit;
         font-weight: 600;
         font-size: 1.2rem;
-x    }
+}
     a:hover, .fa-solid:hover{
         color: rgb(47, 79, 79);
         cursor: pointer;
@@ -156,7 +156,7 @@ x    }
     /* 🔹 漢堡選單按鈕 */
     .menu-toggle {
         display: block;
-        font-size: 24px;
+        font-size: 20px;
         cursor: pointer;
         position: absolute;
     right: 20px; 
