@@ -1,0 +1,37 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+    const res = await fetch("http://localhost:4000/daily");
+    const dailys = await res.json();
+    return dailys.map((d: any) => ({
+        params: { id: d.id },
+        props: d,
+    }));
+}
+const { title, date, img, age, description } = Astro.props;
+---
+
+<Layout>
+    <div class="detail-container">
+        <img class="detail-img" src=`http://localhost:4000${img}` alt="" />
+        <h2 class="detail">Title: {title}</h2>
+        <h2 class="detail">Date: {date}</h2>
+        <h2 class="detail">Age: {age}</h2>
+        <h2 class="detail">Description: {description}</h2>
+    </div>
+</Layout>
+
+<style>
+    .detail-container {
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .detail-img {
+        width: 50%;
+        max-height: 500px;
+        border-radius: 10px;
+    }
+</style>

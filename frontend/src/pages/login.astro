@@ -1,0 +1,84 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout>
+    <div class="login-container">
+        <h1>Start your beautiful day 😊</h1>
+        <form  class="login-form" action="" method="post" id="login">
+            <div class="user-login">
+            <label for="username">Username:</label>
+            <input required type="text" id="username" name="username" />
+        </div>
+        <div class="user-password">
+            <label for="password">Password:</label>
+            <input required type="password" id="password" name="password" />
+        </div>
+            <button class="login-btn" type="submit">Log in</button>
+        </form>
+        <p>If you aren't our member, please create account !</p>
+        <button class="register-btn"><a href="/register">Create Account</a></button>
+    </div>
+</Layout>
+
+<style>
+    .login-btn, .register-btn{
+			color: #EA4C89;
+			background: none;
+			border: none;
+			outline: none;
+			padding: 5px 10px;
+			font-size: 16px;
+            font-weight: 600;
+			cursor: pointer;
+		}
+
+		.login-btn:hover, .register-btn:hover {
+			text-decoration: underline;
+			color: rgb(47, 79, 79);  
+		}
+
+    .login-form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 1.5rem;
+    }
+    .login-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 75vh;
+    }
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+</style>
+<script>
+    const form = document.querySelector("#login") as HTMLFormElement;
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target as HTMLFormElement);
+        const formObject = Object.fromEntries(formData.entries());
+
+        const res = await fetch(`http://localhost:4000/login`, {
+            method: "post",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formObject),
+        });
+
+        if (res.ok) {
+            window.location.href = "/profile";
+        }
+        const response = await res.json();
+        alert(response.error);
+
+        // console.log(response.error)
+    });
+</script>

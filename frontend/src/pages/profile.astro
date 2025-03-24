@@ -1,0 +1,72 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout>
+    <div class="profile-container">
+        <p id="username">Username</p>
+        <button id="logout">Log out</button>
+        <img src="" alt="" />
+    </div>
+</Layout>
+
+<style>
+    .profile-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 75vh;
+    }
+    #logout {
+        color: #ea4c89;
+        background: none;
+        border: none;
+        outline: none;
+        padding: 5px 10px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    #logout:hover {
+        text-decoration: underline;
+        color: rgb(47, 79, 79);
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", async () => {
+        const data = await getData();
+        const username = document.querySelector("#username") as HTMLElement;
+
+        username.innerHTML = `<div style= "font-size:2rem"><b>Hi ! </b> <span style= "color:rgb(32, 178, 170)"> ${data.username}</span>. Welcome to SProut  <i class="fa-solid fa-seedling" style= "color:orange"></i></div>`;
+    });
+
+    const logoutBtn = document.querySelector("#logout") as HTMLButtonElement;
+
+    logoutBtn.addEventListener("click", async () => {
+        await logout();
+        alert("Logging out...");
+        window.location.href = "/";
+    });
+
+    const getData = async () => {
+        const res = await fetch(`http://localhost:4000/check-auth`, {
+            method: "get",
+            credentials: "include",
+        });
+        if (!res.ok) {
+            alert("User is not logged in !");
+            window.location.href = "/";
+        }
+        return await res.json();
+    };
+
+    const logout = async () => {
+        await fetch(`http://localhost:4000/logout`, {
+            method: "get",
+            credentials: "include",
+        });
+    };
+</script>

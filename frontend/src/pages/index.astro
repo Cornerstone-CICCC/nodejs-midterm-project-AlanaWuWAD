@@ -1,0 +1,141 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout>
+	<div class="container">
+		<div class="photos">
+			<h2 class="sentence">Little steps today, big memories tomorrow.</h2>
+			<img
+				class="fade-in"
+				id="h1"
+				src="https://images.pexels.com/photos/265987/pexels-photo-265987.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+				alt=""
+			/>
+			<h2 class="sentence">Time passes, but love and memories remain.</h2>
+			<div class="photo-row2">
+				<img
+					class="fade-in"
+					id="v2-left"
+					src="https://images.pexels.com/photos/459976/pexels-photo-459976.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+					alt=""
+				/>
+				<img
+					class="fade-in"
+					id="v2-right"
+					src="https://images.pexels.com/photos/1104007/pexels-photo-1104007.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+					alt=""
+				/>
+			</div>
+			<h2 class="sentence">Every smile, every step — your story begins here.</h2>
+			<img
+				class="fade-in"
+				id="h3"
+				src="https://images.pexels.com/photos/1231365/pexels-photo-1231365.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+				alt=""
+			/>
+		</div>
+		<div class="auther">
+			<div class="auther-cont">
+				<h1>🌱 SProut to be Proud</h1>
+				<img
+					id="auther-photo"
+					src="https://images.pexels.com/photos/5561461/pexels-photo-5561461.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+					alt=""
+				/>
+				<p>
+					No matter how small the step, every effort brings you closer
+					to becoming the best version of yourself. Keep growing, keep
+					striving, and be proud of how far you've come! 🌿
+				</p>
+			</div>
+		</div>
+	</div>
+</Layout>
+
+<style>
+.container {
+		display: flex;
+		position: relative;
+	}
+	.photos {
+		flex: 8; /* 左側佔 70% */
+		/* background-color: lightblue; */
+		padding: 20px;
+		text-align: center;
+	}
+	.auther {
+		flex: 2; /* 右側佔 30% */
+		background-color: rgb(232, 233, 222);
+		padding: 20px;
+		text-align: center;
+		position: relative;
+	}
+	.auther-cont {
+		position: fixed;
+		top:5rem;
+		padding: 0.5rem;
+	}
+	.auther p {
+		font-size: 1rem;
+	}
+	#h1,
+	#h3 {
+		width: 100%;
+		height: auto;
+	}
+	#v2-left,
+	#v2-right {
+		width: 45%;
+	}
+	.photo-row2 {
+		display: flex;
+		justify-content: center;
+		gap: 5px;
+		padding: 5px;
+	}
+	#auther-photo {
+		width: 90%;
+		border-radius: 10px;
+	}
+	img{
+		border-radius: 10px;
+	}
+
+	.sentence {
+		color: 	rgb(255, 99, 71);
+    opacity: 0;
+    transform: translateX(-50px); /* 初始位置 (從左側飛入) */
+    animation: fly-in 1s ease-out forwards;
+}
+
+@keyframes fly-in {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+.sentence:nth-child(1) { animation-delay: 0.2s; }
+.sentence:nth-child(2) { animation-delay: 5s; }
+.sentence:nth-child(3) { animation-delay: 2s; }
+
+@media (max-width: 768px) {
+	.auther-cont, h1{
+		font-size: 1rem;
+	}
+}
+</style>
+
+<script>
+	const res = await fetch(`http://localhost:4000`, {
+		method: "get",
+		credentials: "include",
+	});
+	const data = await res.json();
+
+
+</script>
